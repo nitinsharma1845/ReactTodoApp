@@ -3,21 +3,21 @@ import AddTodo from "./components/AddTodo";
 import TodoItems from "./components/TodoItems";
 import { useState } from "react";
 import EmptyTask from "./components/EmptyTask";
-const App = () => {
-  const [todos, setTodos] = useState([
-    
-  ]);
 
+import { TodoContext } from "./context/TodoContext";
+
+const App = () => {
+  const [todos, setTodos] = useState([]);
 
   return (
-    <>
+    <TodoContext.Provider value={{ todos, setTodos }}>
       <AppName />
-      <AddTodo setNewTodo = {setTodos} todos = {todos} />
+      <AddTodo />
 
-      {todos.length <= 0 ? <EmptyTask /> : null }
-      
-      <TodoItems Todos={todos} setNewTodo = {setTodos} />
-    </>
+      {todos.length <= 0 ? <EmptyTask /> : null}
+
+      <TodoItems />
+    </TodoContext.Provider>
   );
 };
 
